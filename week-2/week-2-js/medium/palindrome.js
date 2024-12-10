@@ -4,7 +4,18 @@
 */
 
 function isPalindrome(str) {
-  return true;
+  str = str.replace(/[!?.,]/g, '')
+  str = str.replace(/\s+/g,'')
+  str = str.toLowerCase()
+  strRev = str.split('').reverse().join('');
+  console.log(str)
+  console.log(strRev)
+  for( let i = 0; i < str.length; i++){
+    if(str[i]!==strRev[i]){
+      return false
+    }
+  }
+  return true
 }
-
+console.log(isPalindrome('hello'))
 module.exports = isPalindrome;

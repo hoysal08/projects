@@ -5,8 +5,16 @@
   Once you've implemented the logic, test your code by running
 */
 
-function countVowels(str) {
-    // Your code here
+function isVowel(char){
+  return char === 'a' || char === 'e' || char === 'i'||char === 'o'||char === 'u'
 }
 
+function countVowels(str) {
+    let count = 0;
+    str = str.toLowerCase()
+    str.split('').forEach(char => isVowel(char) ? count++ : 0)
+    return count;
+}
+
+// console.log(countVowels('EaSiEr'))
 module.exports = countVowels;
