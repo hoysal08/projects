@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="body-wrapper">
+      <div class="footer">
+        <!-- Content is rendered through js -->
+      </div>
+    </div>
+  </body>
+  <script src="./index.js"></script>
+  <style>
+    .body-wrapper {
+      width: 100vw;
+      height: 100vh;
+      background-color: aquamarine;
+    }
+    .footer {
+      position: relative;
+      top: 90vh;
+      max-width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+      border-radius: 10px;
+    }
+    .btn {
+      border: none;
+      border-radius: 5px;
+      font-size: 15px;
+      padding: 6px 10px;
+      margin: 10px;
+      transition: transform 0.2s;
+    }
+    .btn:hover {
+      cursor: pointer;
+      transform: scale(1.5);
+    }
+    body {
+      margin: 0;
+      /* overflow: hidden; */
+    }
+  </style>
+</html>
