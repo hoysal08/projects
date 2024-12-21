@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main-cnt">
+      <div class="main">
+        <div class="question-cnt">
+          <div class="question">What does CSS stand for ?</div>
+          <div class="options">
+            <div>
+              <input
+                name="option"
+                id="op1"
+                value="a"
+                type="radio"
+              />
+              <label id="op1l" for="op1">Central Style Sheets</label>
+            </div>
+            <div>
+              <input
+                name="option"
+                id="op2"
+                value="b"
+                type="radio"
+              />
+              <label id="op2l" for="op2"> Cascading Style Sheets </label>
+            </div>
+            <div>
+              <input
+                name="option"
+                id="op3"
+                value="c"
+                type="radio"
+              />
+              <label id="op3l" for="op3">Cars SUVs Sailboats</label>
+            </div>
+            <div>
+              <input
+                name="option"
+                id="op4"
+                value="d"
+                type="radio"
+              />
+              <label id="op4l" for="op4">Cascading Simple Sheets</label>
+            </div>
+          </div>
+        </div>
+        <div>
+            <button class="footer" onclick="handleSubmit()" >Submit</button>
+      </div>
+    </div>
+  </body>
+  <style>
+    body {
+      margin: 0;
+    }
+    .main-cnt {
+      width: 100vw;
+      height: 100vh;
+      background-color: rgb(181, 214, 239);
+    }
+    .main {
+      width: max-content;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      top: 30%;
+    }
+    .question-cnt {
+        background-color: ghostwhite;
+      padding: 50px 100px;
+      border-radius: 10px;
+    }
+    .question {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 40px;
+      font-weight: 700;
+      padding-bottom: 20px;
+    }
+    .footer{
+        margin-top: 10px;
+        border-radius: 10px;
+        min-height: 35px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        border: none;
+        background-color: rgb(121, 70, 232);
+        color: white;
+    }
+    .options > *{
+        margin: 10px 0;
+    }
+    label{
+        font-size: 20px;
+    }
+    button:hover{
+        cursor: pointer;
+    }
+  </style>
+  <script src="./index.js"></script>
+</html>
