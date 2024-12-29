@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main-wrp">
+      <div class="builder">
+        <h2>Form Builder</h2>
+        <div class="builder-cnt">
+          <label for="ip-type">Select Field Type</label>
+          <select id="ip-type" name="ip-type">
+            <option value="test-ip">Text input</option>
+            <option value="radio-ip">Radio Input</option>
+            <option value="checkbox-ip">Checkbox</option>
+          </select>
+          <label for="ip-lable">Select Field Label</label>
+          <input type="text" />
+          <button>Add Field</button>
+        </div>
+      </div>
+      <div class="preview">preview</div>
+    </div>
+  </body>
+  <script src="index.js"></script>
+  <style>
+    body {
+      margin: 0;
+    }
+    .main-wrp {
+      width: 100vw;
+      height: 100vh;
+      /* background-color: red; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .builder,
+    .preview {
+      border: 1px solid black;
+      width: 45%;
+      height: 50%;
+      margin: 10px;
+    }
+    .builder-cnt {
+      display: flex;
+      flex-direction: column;
+      padding: 0 2%;
+    }
+  </style>
+</html>
