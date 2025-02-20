@@ -6,7 +6,5 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(error)
-  res.status(500).send({ error: JSON.parse(error.message)
-   });
+  res.status(500).send({ error: JSON.parse(error.message) });
 };
