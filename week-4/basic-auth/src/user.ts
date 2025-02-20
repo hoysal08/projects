@@ -30,4 +30,8 @@ export const UserService = {
       )
       .get({ username, password });
   },
+
+  getUserByToken: (token: string) => {
+    return db.prepare("SELECT * FROM user where token=@token").get({ token });
+  },
 };

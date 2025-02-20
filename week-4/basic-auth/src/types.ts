@@ -7,3 +7,5 @@ export const userCreateValidation = z.object({
   });
   
 export type User = z.infer<typeof userCreateValidation>;
+
+export const authSchema = z.string().min(1, "Authorization token is required");

@@ -1,7 +1,7 @@
 import { UserService } from "./user";
 import express from "express";
 import { errorHandler } from "./errorHandler";
-import { userCreateValidation } from "./types";
+import { authSchema, userCreateValidation } from "./types";
 import { generateToken } from "./utils";
 
 const app = express();
@@ -42,6 +42,7 @@ app.post("/signin", (req, res) => {
   if (user) {
     const token = user.token ? user.token : generateToken();
     UserService.updateUserToken(user, token);
+    res.cookie("token", token);
     res.send({
       token,
     });
@@ -51,5 +52,20 @@ app.post("/signin", (req, res) => {
     });
   }
 });
+
+app.get("/me", (req, res) => {
+  try {
+    const token = authSchema.parse(req.headers.authorization);
+    const user = UserService.getUserByToken(token);
+    if (!user) {
+      res.status(401).json({ error: "Invalid token" });
+      return;
+    }
+    res.status(200).json(user)
+  } catch (err) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
+  }
+})
 const port = 3000;
 app.listen(port, () => console.log("Server running on port: ", port));
