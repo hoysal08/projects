@@ -1,11 +1,11 @@
 import { UserService } from "./user";
 import express from "express";
 import { errorHandler } from "./errorHandler";
-import { authSchema, userCreateValidation } from "./types";
-import { generateToken } from "./utils";
+import { authSchema, jwtPayload, userCreateValidation } from "./types";
+import jwt from "jsonwebtoken";
 
 const app = express();
-
+const JWT_SECRET = "USER_APP";
 app.use(express.json());
 app.use(errorHandler);
 
@@ -40,7 +40,14 @@ app.post("/signin", (req, res) => {
 
   const user = userCreateValidation.parse(requestedUser);
   if (user) {
-    const token = user.token ? user.token : generateToken();
+    const token = user.token
+      ? user.token
+      : jwt.sign(
+          {
+            username: user.username,
+          },
+          JWT_SECRET
+        );
     UserService.updateUserToken(user, token);
     res.cookie("token", token);
     res.send({
@@ -56,16 +63,21 @@ app.post("/signin", (req, res) => {
 app.get("/me", (req, res) => {
   try {
     const token = authSchema.parse(req.headers.authorization);
-    const user = UserService.getUserByToken(token);
+    const userDetails = jwt.verify(token, JWT_SECRET) as jwtPayload;
+    const user = userCreateValidation.parse(UserService.getUserByToken(token));
     if (!user) {
       res.status(401).json({ error: "Invalid token" });
       return;
     }
-    res.status(200).json(user)
+    if (user.username != userDetails.username) {
+      res.status(401).json({ error: "Invalid token" });
+      return;
+    }
+    res.status(200).json(user);
   } catch (err) {
     res.status(401).json({ error: "Unauthorized" });
     return;
   }
-})
+});
 const port = 3000;
 app.listen(port, () => console.log("Server running on port: ", port));
