@@ -1,11 +1,12 @@
 import { UserService } from "./user";
 import express from "express";
 import { errorHandler } from "./errorHandler";
-import { authSchema, jwtPayload, userCreateValidation } from "./types";
+import { authSchema, userCreateValidation } from "./types";
 import jwt from "jsonwebtoken";
+import { auth } from "./auth";
 
 const app = express();
-const JWT_SECRET = "USER_APP";
+export const JWT_SECRET = "USER_APP";
 app.use(express.json());
 app.use(errorHandler);
 
@@ -60,19 +61,10 @@ app.post("/signin", (req, res) => {
   }
 });
 
-app.get("/me", (req, res) => {
+app.get("/me", auth, (req, res) => {
   try {
     const token = authSchema.parse(req.headers.authorization);
-    const userDetails = jwt.verify(token, JWT_SECRET) as jwtPayload;
     const user = userCreateValidation.parse(UserService.getUserByToken(token));
-    if (!user) {
-      res.status(401).json({ error: "Invalid token" });
-      return;
-    }
-    if (user.username != userDetails.username) {
-      res.status(401).json({ error: "Invalid token" });
-      return;
-    }
     res.status(200).json(user);
   } catch (err) {
     res.status(401).json({ error: "Unauthorized" });
