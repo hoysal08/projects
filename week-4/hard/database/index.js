@@ -8,7 +8,8 @@ mongoose.connect("mongodb://localhost:27017/userAuth");
 const UserSchema = new mongoose.Schema({
   name: String,
   email: { type: String, unique: true },
-  password: String,
+  passwordHash: String,
+  salt: String
 });
 
 const TodoSchema = new mongoose.Schema({

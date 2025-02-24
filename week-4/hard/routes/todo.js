@@ -3,7 +3,6 @@ const { Router } = require("express");
 const adminMiddleware = require("../middleware/user");
 const { Todo } = require("../database");
 const router = Router();
-
 // todo Routes
 router.post("/", async (req, res) => {
   const title = req.body.title;
