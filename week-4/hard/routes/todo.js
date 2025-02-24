@@ -12,6 +12,7 @@ router.post("/", async (req, res, next) => {
         userId: req.userId,
         title,
         done: false,
+        createdDate: new Date(),
       });
       return res.status(200).send();
     } else {
@@ -22,7 +23,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/", adminMiddleware, async (req, re, next) => {
+router.put("/", adminMiddleware, async (req, res, next) => {
   try {
     const todoId = req.body.todoId;
     const updatedTitle = req.body.updatedTitle;
@@ -68,7 +69,7 @@ router.delete("/:id", adminMiddleware, async (req, res, next) => {
 router.get("/", adminMiddleware, async (req, res, next) => {
   try {
     return res.status(200).json({
-      todos: await Todo.find({}, {}, { limit: 10 }),
+      todos: await Todo.find({}, {}, { limit: 10 }).populate("userId"),
     });
   } catch (err) {
     next(err);
@@ -79,7 +80,7 @@ router.get("/:id", adminMiddleware, async (req, res, next) => {
   try {
     const todoId = req.params.id;
     if (todoId) {
-      const todo = await Todo.findById(todoId);
+      const todo = await Todo.findById(todoId).populate("userId");
       return res.status(200).json({ todo });
     } else {
       return res.status(400).json({ message: "Invalid Request" });
@@ -93,7 +94,11 @@ router.post("/updateDone/:id", async (req, res, next) => {
   try {
     const todoId = req.params.id;
     if (todoId) {
-      const todo = await Todo.findByIdAndUpdate(todoId, { done: true },{ new: true });
+      const todo = await Todo.findByIdAndUpdate(
+        todoId,
+        { done: true, doneDate: new Date() },
+        { new: true }
+      );
       return res.status(200).json({ todo });
     } else {
       return res.status(400).json({ message: "Invalid Request" });
