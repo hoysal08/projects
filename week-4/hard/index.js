@@ -11,11 +11,18 @@ app.use(express.json());
 
 app.get("/healthy", (req, res) => res.send("I am Healthy"));
 
-//  start writing your routes here
 
 app.use("/", userRouter);
 app.use(userMiddleware)
 app.use("/todo",todoRouter)
+app.use((err, req, res, next) => {
+  console.error("Error:", err); 
+
+  res.status(500).json({
+    message: "Internal Server Error", 
+    error: err.message, 
+  });
+});
 
 app.listen(port, () =>
   console.log(`server is running at http://localhost:${port}`)
