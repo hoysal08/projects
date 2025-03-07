@@ -29,53 +29,53 @@ const User = mongoose.model('User', userSchema);
 const Admin = mongoose.model('Admin', adminSchema);
 const Course = mongoose.model('Course', courseSchema);
 
-const authMiddleware = (req, res, next) => {
+const authMiddleware = (req: any, res: any, next: any) => {
 //  authMiddleware logic here 
 };
 
 // Connect to MongoDB
-mongoose.connect('<YourMongoDbConnectionString>'); 
+mongoose.connect('mongodb://localhost:27017/coursify'); 
 
 
 // Admin routes
-app.post('/admin/signup', (req, res) => {
+app.post('/admin/signup', (req: any, res: any) => {
     // logic to sign up admin
 });
 
-app.post('/admin/login', (req, res) => {
+app.post('/admin/login', (req: any, res: any) => {
     // logic to log in admin
 });
 
-app.post('/admin/courses', (req, res) => {
+app.post('/admin/courses', (req: any, res: any) => {
     // logic to create a course
 });
 
-app.put('/admin/courses/:courseId', (req, res) => {
+app.put('/admin/courses/:courseId', (req: any, res: any) => {
     // logic to edit a course
 });
 
-app.get('/admin/courses', (req, res) => {
+app.get('/admin/courses', (req: any, res: any) => {
     // logic to get all courses
 });
 
 // User routes
-app.post('/users/signup', (req, res) => {
+app.post('/users/signup', (req: any, res: any) => {
     // logic to sign up user
 });
 
-app.post('/users/login', (req, res) => {
+app.post('/users/login', (req: any, res: any) => {
     // logic to log in user
 });
 
-app.get('/users/courses', (req, res) => {
+app.get('/users/courses', (req: any, res: any) => {
     // logic to list all courses
 });
 
-app.post('/users/courses/:courseId', (req, res) => {
+app.post('/users/courses/:courseId', (req: any, res: any) => {
     // logic to purchase a course
 });
 
-app.get('/users/purchasedCourses', (req, res) => {
+app.get('/users/purchasedCourses', (req: any, res: any) => {
     // logic to view purchased courses
 });
 
