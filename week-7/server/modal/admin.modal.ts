@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
+
 const adminSchema = new mongoose.Schema({
-  // adminSchema here
+  username: { type: String, unique: true, required: true },
+  passwordHash: { type: String, required: true },
+  salt: { type: String, required: true }
 });
 
-const Admin = mongoose.model("Admin", adminSchema);
+export const Admin = mongoose.model("Admin", adminSchema);
