@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 
-const secret = process.env.JWT_SECRERT; // This should be in an environment variable in a real application
+const secret = process.env.JWT_SECRET; 
 const port = process.env.PORT;
 app.use("/admin", adminRouter)
 app.listen(port, () => {
