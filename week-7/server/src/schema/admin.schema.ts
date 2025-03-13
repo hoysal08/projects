@@ -11,3 +11,8 @@ export const adminAuthRequest = z.object({
       .max(30),
   }),
 });
+
+export const adminEntitySchema = z.object({
+  username: z.string(),
+  passwordHash: z.string()
+})
